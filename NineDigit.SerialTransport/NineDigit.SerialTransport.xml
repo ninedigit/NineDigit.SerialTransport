@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NineDigit.SerialTransport</name>
+    </assembly>
+    <members>
+        <member name="T:NineDigit.SerialTransport.ITransportConnection">
+            <summary>
+            Stav transportnej vrstvy.
+            </summary>
+        </member>
+        <member name="P:NineDigit.SerialTransport.ITransportConnection.State">
+            <summary>
+            Aktuálny stav spojenia transportnej vrstvy.
+            </summary>
+        </member>
+        <member name="P:NineDigit.SerialTransport.ITransportConnection.LastError">
+            <summary>
+            Posledná chyba, ktorá spôsobila prerušenie spojenia.
+            Hodnota je nastavená iba pre <see cref="P:NineDigit.SerialTransport.ITransportConnection.State"/> rovný <see cref="F:NineDigit.SerialTransport.TransportConnectionState.Disconnected"/>.
+            </summary>
+            <value><see cref="T:System.Exception"/> alebo <c>null</c>.</value>
+        </member>
+        <member name="E:NineDigit.SerialTransport.ITransportConnection.Error">
+            <summary>
+            Raised when transport error occurs.
+            </summary>
+        </member>
+        <member name="E:NineDigit.SerialTransport.ITransportConnection.StateChanged">
+            <summary>
+            Raised when trasnport connection state is changed.
+            </summary>
+        </member>
+        <member name="T:NineDigit.SerialTransport.TransportConnectionState">
+            <summary>
+            Transport connection state
+            </summary>
+        </member>
+        <member name="F:NineDigit.SerialTransport.TransportConnectionState.Disconnected">
+            <summary>
+            Transport connection is down
+            </summary>
+        </member>
+        <member name="F:NineDigit.SerialTransport.TransportConnectionState.Connected">
+            <summary>
+            Transport connection is up
+            </summary>
+        </member>
+        <member name="T:NineDigit.SerialTransport.TransportConnectionStateChange">
+            <summary>
+            Represents connection state change.
+            </summary>
+        </member>
+        <member name="M:NineDigit.SerialTransport.TransportConnectionStateChange.#ctor(NineDigit.SerialTransport.TransportConnectionState,NineDigit.SerialTransport.TransportConnectionState)">
+            <summary>
+            Creates new instance of connection state change.
+            </summary>
+            <param name="newState"></param>
+            <param name="oldState"></param>
+        </member>
+        <member name="P:NineDigit.SerialTransport.TransportConnectionStateChange.NewState">
+            <summary>
+            Current state
+            </summary>
+        </member>
+        <member name="P:NineDigit.SerialTransport.TransportConnectionStateChange.OldState">
+            <summary>
+            Previous state.
+            </summary>
+        </member>
+        <member name="M:NineDigit.SerialTransport.ReadTimeoutException.#ctor(System.Nullable{System.Int32},System.String)">
+            <summary>
+            Creates new instance of transport exception.
+            </summary>
+        </member>
+        <member name="T:NineDigit.SerialTransport.ReadTransportException">
+            <summary>
+            Represents exception related to writing data to device.
+            </summary>
+        </member>
+        <member name="T:NineDigit.SerialTransport.TransportException">
+            <summary>
+            Represents exception related to data exchange between devices.
+            </summary>
+        </member>
+        <member name="T:NineDigit.SerialTransport.WriteTransportException">
+            <summary>
+            Represents exception related to writing data to device.
+            </summary>
+        </member>
+        <member name="T:NineDigit.SerialTransport.ITransport">
+            <summary>
+            Interface for transport layer that exchanges byte array between two endpoints.
+            </summary>
+        </member>
+        <member name="M:NineDigit.SerialTransport.ITransport.WriteAndReadAsync(System.Byte[],System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Executes data exchange with another device.
+            </summary>
+            <param name="data">Data to be written.</param>
+            <param name="responseLength">Expected resposne length (in bytes)</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>Response received from opposite endpoint.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="data"/> is null.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="data"/> contains no elements.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="responseLength"/> is negative.</exception>
+            <exception cref="T:System.OperationCanceledException">Operation was canceled.</exception>
+            <exception cref="T:NineDigit.SerialTransport.TransportException">Error during writing/reading data.</exception>
+        </member>
+        <member name="M:NineDigit.SerialTransport.ITransport.DiscardBuffers">
+            <summary>
+            Discards input and output buffer.
+            </summary>
+        </member>
+        <member name="M:NineDigit.SerialTransport.ITransport.Disconnect(System.Exception)">
+            <summary>
+            Disconnects from the other endpoint.
+            </summary>
+            <param name="ex">Error that casuses the disconnection.</param>
+        </member>
+        <member name="M:NineDigit.SerialTransport.ITransportExtensions.ReadAsync(NineDigit.SerialTransport.ITransport,System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            </summary>
+            <param name="self">Transport</param>
+            <param name="buffer">The buffer to write the data into.</param>
+            <param name="offset">The byte offset in buffer at which to begin writing data from the stream.</param>
+            <param name="count">The maximum number of bytes to read.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>
+            A task that represents the asynchronous read operation. The value of the TResult
+            parameter contains the total number of bytes read into the buffer.
+            </returns>
+        </member>
+        <member name="T:NineDigit.SerialTransport.AndroidSerialPort">
+            <summary>
+            https://github.com/mik3y/usb-serial-for-android/blob/master/usbSerialForAndroid/src/main/java/com/hoho/android/usbserial/driver/UsbSerialPort.java
+            </summary>
+        </member>
+        <member name="T:NineDigit.SerialTransport.UsbId">
+            <summary>
+            List of additional USB device vendors/products
+            </summary>
+        </member>
+        <member name="F:NineDigit.SerialTransport.UsbId.VENDOR_JMSYSTEMS">
+            <summary>
+            JM Systems, s.r.o.
+            </summary>
+        </member>
+        <member name="F:NineDigit.SerialTransport.UsbId.JMSYSTEMS_CHDULITE">
+            <summary>
+            CHDU Lite >=v1.0
+            </summary>
+        </member>
+        <member name="T:NineDigit.SerialTransport.SerialTransportConnection">
+            <summary>
+            Platform-independent implementation of serial transport
+            </summary>
+        </member>
+        <member name="T:NineDigit.SerialTransport.TransportConnectionBase">
+            <summary>
+            Base implementation of transport connection
+            </summary>
+        </member>
+        <member name="E:NineDigit.SerialTransport.TransportConnectionBase.Error">
+            <summary>
+            Raised when transport error occurs.
+            </summary>
+        </member>
+        <member name="E:NineDigit.SerialTransport.TransportConnectionBase.StateChanged">
+            <summary>
+            Raised when trasnport connection state is changed.
+            </summary>
+        </member>
+        <member name="P:NineDigit.SerialTransport.TransportConnectionBase.State">
+            <summary>
+            Current transport connection state.
+            </summary>
+        </member>
+        <member name="P:NineDigit.SerialTransport.TransportConnectionBase.LastError">
+            <summary>
+            Last error that caused disconnecting of trasnport connection.
+            Value is non-null only when <see cref="P:NineDigit.SerialTransport.TransportConnectionBase.State"/> is equal to <see cref="F:NineDigit.SerialTransport.TransportConnectionState.Disconnected"/>.
+            </summary>
+            <value><see cref="T:System.Exception"/> or <c>null</c>.</value>
+        </member>
+        <member name="M:NineDigit.SerialTransport.TransportConnectionBase.SetConnected">
+            <summary>
+            Sets connection state to <see cref="F:NineDigit.SerialTransport.TransportConnectionState.Connected"/> and clears last error.
+            </summary>
+        </member>
+        <member name="M:NineDigit.SerialTransport.TransportConnectionBase.SetDisconnected">
+            <summary>
+            Sets connection state to <see cref="F:NineDigit.SerialTransport.TransportConnectionState.Disconnected"/> and raises the <see cref="E:NineDigit.SerialTransport.TransportConnectionBase.Error"/> event.
+            </summary>
+        </member>
+        <member name="M:NineDigit.SerialTransport.TransportConnectionBase.SetDisconnected(System.Exception)">
+            <summary>
+            Sets connection state to <see cref="F:NineDigit.SerialTransport.TransportConnectionState.Disconnected"/>, stores given <paramref name="ex"/> and raises the <see cref="E:NineDigit.SerialTransport.TransportConnectionBase.Error"/> event.
+            </summary>
+            <param name="ex"></param>
+        </member>
+        <member name="T:NineDigit.SerialTransport.TransportFactory">
+            <summary>
+            Helper for instantiating transport instance.
+            </summary>
+        </member>
+        <member name="M:NineDigit.SerialTransport.TransportFactory.CreateSerialTransport(System.String,NineDigit.SerialTransport.SerialPortOptions,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Instantiates new transport instance.
+            </summary>
+            <param name="portName">Port name (or device name for mono)</param>
+            <param name="options">Serial port options</param>
+            <param name="loggerFactory">Logger factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:NineDigit.SerialTransport.TransportFactory.CreateSerialPort(System.String,NineDigit.SerialTransport.SerialPortOptions,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Instantiates new serial port instance.
+            </summary>
+            <param name="portName">Port name (or device name for mono)</param>
+            <param name="options">Serial port options</param>
+            <param name="loggerFactory">Logger factory</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -21,8 +21,8 @@ namespace NineDigit.SerialTransport
                 throw new System.ArgumentNullException(nameof(loggerFactory));
 
             var serialPort = CreateSerialPort(portName, options, loggerFactory);
-            var serialTransportConnectionLogger = loggerFactory.CreateLogger<SerialTransportConnection>();
-            var serialTransportConnection = new SerialTransportConnection(serialPort, serialTransportConnectionLogger);
+            var serialTransportConnectionLogger = loggerFactory.CreateLogger<TransportConnection>();
+            var serialTransportConnection = new TransportConnection(serialPort, serialTransportConnectionLogger);
 
             return serialTransportConnection;
         }

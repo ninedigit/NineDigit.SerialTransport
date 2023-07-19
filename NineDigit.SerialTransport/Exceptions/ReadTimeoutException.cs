@@ -29,18 +29,18 @@ namespace NineDigit.SerialTransport
         {
         }
 
-        internal ReadTimeoutException(int? timeout, string? portName, string? message)
+        public ReadTimeoutException(int? timeout, string? portName, string? message)
             : this(timeout, portName, message, innerException: null)
         {
         }
 
-        internal ReadTimeoutException(int? timeout, string? portName, Exception? innerException)
+        public ReadTimeoutException(int? timeout, string? portName, Exception? innerException)
             : this(timeout, portName, GetDefaultMessage(timeout, portName), innerException)
         {
             this.Timeout = timeout;
         }
         
-        internal ReadTimeoutException(int? timeout, string? portName, string? message, Exception? innerException)
+        public ReadTimeoutException(int? timeout, string? portName, string? message, Exception? innerException)
             : base(portName, message, innerException)
         {
             this.Timeout = timeout;

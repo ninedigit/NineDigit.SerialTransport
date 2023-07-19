@@ -19,17 +19,17 @@ namespace NineDigit.SerialTransport
         {
         }
 
-        internal WriteTransportException(string? portName, string? message)
+        public WriteTransportException(string? portName, string? message)
             : this(portName, message, innerException: null)
         {
         }
 
-        internal WriteTransportException(string? portName, Exception? innerException)
+        public WriteTransportException(string? portName, Exception? innerException)
             : this(portName, GetDefaultMessage(portName), innerException)
         {
         }
         
-        internal WriteTransportException(string? portName, string? message, Exception? innerException)
+        public WriteTransportException(string? portName, string? message, Exception? innerException)
             : base(portName, message, innerException)
         {
         }

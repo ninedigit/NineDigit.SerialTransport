@@ -131,27 +131,20 @@
             parameter contains the total number of bytes read into the buffer.
             </returns>
         </member>
-        <member name="T:NineDigit.SerialTransport.AndroidSerialPort">
+        <member name="M:NineDigit.SerialTransport.DotNetSerialPort.#ctor(System.String,NineDigit.SerialTransport.DotNetSerialPortOptions)">
             <summary>
-            https://github.com/mik3y/usb-serial-for-android/blob/master/usbSerialForAndroid/src/main/java/com/hoho/android/usbserial/driver/UsbSerialPort.java
             </summary>
+            <param name="portName">Názov sériového portu, napríklad COM1 alebo /dev/ttyS0.</param>
+            <param name="options">Communication options.</param>
         </member>
-        <member name="T:NineDigit.SerialTransport.UsbId">
+        <member name="M:NineDigit.SerialTransport.DotNetSerialPort.#ctor(System.String,NineDigit.SerialTransport.DotNetSerialPortOptions,Microsoft.Extensions.Logging.ILoggerFactory)">
             <summary>
-            List of additional USB device vendors/products
             </summary>
+            <param name="portName">Názov sériového portu, napríklad COM1 alebo /dev/ttyS0.</param>
+            <param name="options">Communication options.</param>
+            <param name="loggerFactory">Logger factory.</param>
         </member>
-        <member name="F:NineDigit.SerialTransport.UsbId.VENDOR_JMSYSTEMS">
-            <summary>
-            JM Systems, s.r.o.
-            </summary>
-        </member>
-        <member name="F:NineDigit.SerialTransport.UsbId.JMSYSTEMS_CHDULITE">
-            <summary>
-            CHDU Lite >=v1.0
-            </summary>
-        </member>
-        <member name="T:NineDigit.SerialTransport.SerialTransportConnection">
+        <member name="T:NineDigit.SerialTransport.TransportConnection">
             <summary>
             Platform-independent implementation of serial transport
             </summary>

@@ -14,22 +14,22 @@ namespace NineDigit.SerialTransport
         {
         }
 
-        internal TransportException(string? message)
+        public TransportException(string? message)
             : base(message)
         {
         }
 
-        internal TransportException(string? message, Exception? innerException)
+        public TransportException(string? message, Exception? innerException)
             : base(message, innerException)
         {
         }
         
-        internal TransportException(string? portName, string? message)
+        public TransportException(string? portName, string? message)
             : base(portName, message)
         {
         }
 
-        internal TransportException(string? portName, string? message, Exception? innerException)
+        public TransportException(string? portName, string? message, Exception? innerException)
             : base(portName, message, innerException)
         {
         }

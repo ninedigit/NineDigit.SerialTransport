@@ -8,12 +8,12 @@ namespace NineDigit.SerialTransport
     /// <summary>
     /// Platform-independent implementation of serial transport
     /// </summary>
-    internal class SerialTransportConnection : TransportConnectionBase, ITransport
+    internal class TransportConnection : TransportConnectionBase, ITransport
     {
         private readonly ISerialPort _serialPort;
-        private readonly ILogger<SerialTransportConnection> _logger;
+        private readonly ILogger<TransportConnection> _logger;
 
-        public SerialTransportConnection(ISerialPort serialPort, ILogger<SerialTransportConnection> logger)
+        public TransportConnection(ISerialPort serialPort, ILogger<TransportConnection> logger)
         {
             this._serialPort = serialPort
                 ?? throw new ArgumentNullException(nameof(serialPort));
@@ -42,7 +42,7 @@ namespace NineDigit.SerialTransport
 
         private async Task<byte[]?> WriteAndReadInternalAsync(byte[]? data, long? responseLength, CancellationToken cancellationToken)
         {
-            if (responseLength < 0 || responseLength > int.MaxValue)
+            if (responseLength is < 0 or > int.MaxValue)
                 throw new ArgumentOutOfRangeException(nameof(responseLength));
 
             try

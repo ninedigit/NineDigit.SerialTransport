@@ -19,17 +19,17 @@ namespace NineDigit.SerialTransport
         {
         }
 
-        internal ReadTransportException(string? portName, string? message)
+        public ReadTransportException(string? portName, string? message)
             : this(portName, message, innerException: null)
         {
         }
 
-        internal ReadTransportException(string? portName, Exception? innerException)
+        public ReadTransportException(string? portName, Exception? innerException)
             : this(portName, GetDefaultMessage(portName), innerException)
         {
         }
         
-        internal ReadTransportException(string? portName, string? message, Exception? innerException)
+        public ReadTransportException(string? portName, string? message, Exception? innerException)
             : base(portName, message, innerException)
         {
         }

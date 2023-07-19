@@ -26,12 +26,12 @@ namespace NineDigit.SerialTransport
         {
         }
 
-        internal WriteTimeoutException(int? timeout, string? portName, string? message)
+        public WriteTimeoutException(int? timeout, string? portName, string? message)
             : this(timeout, portName, message, innerException: null)
         {
         }
 
-        internal WriteTimeoutException(int? timeout, string? portName, Exception? innerException)
+        public WriteTimeoutException(int? timeout, string? portName, Exception? innerException)
             : this(timeout, portName, GetDefaultMessage(timeout, portName), innerException)
         {
             this.Timeout = timeout;

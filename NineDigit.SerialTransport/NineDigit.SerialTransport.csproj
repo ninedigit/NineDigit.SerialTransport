@@ -37,7 +37,7 @@
 
   <ItemGroup>
     <None Remove="NineDigit.SerialTransport.xml" />
-    <None Include="$(ProjectDir)README.md" Pack="true" PackagePath="\">
+    <None Include="$(SolutionDir)README.md" Pack="true" PackagePath="\">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

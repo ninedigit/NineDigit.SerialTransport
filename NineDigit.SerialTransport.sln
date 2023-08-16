@@ -7,8 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NineDigit.SerialTransport",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{525EF74B-6AE7-41B7-AF41-4EFD5BA5E1B9}"
 	ProjectSection(SolutionItems) = preProject
+		Common.props = Common.props
+		CreateNuGetPackage.props = CreateNuGetPackage.props
 		global.json = global.json
 		README.md = README.md
+		Versions.props = Versions.props
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NineDigit.SerialTransport.CLI", "NineDigit.SerialTransport.CLI\NineDigit.SerialTransport.CLI.csproj", "{C3E9722B-3712-437A-89FE-9344FF413D89}"
@@ -32,5 +35,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4CB0395D-9C10-4773-A1CB-4D5273A3ED58}
 	EndGlobalSection
 EndGlobal

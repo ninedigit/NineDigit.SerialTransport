@@ -14,7 +14,7 @@
   <PropertyGroup>
     <PackageId>NineDigit.SerialTransport</PackageId>
     <Title>Multiplatform serial port implementation</Title>
-    <Authors>Tomáš Peťovský</Authors>
+    <Authors>Tomáš Peťovský, Juraj Málach</Authors>
     <Company>Nine Digit, s.r.o.</Company>
     <Version>$(Version)</Version>
     <InformationalVersion>$(InformationalVersion)</InformationalVersion>

@@ -96,7 +96,7 @@ namespace NineDigit.SerialTransport
             }
             catch (UnauthorizedAccessException ex)
             {
-                throw new BusyPortException( this.serialPort.PortName, $"Port '{this.serialPort.PortName}' is busy.", ex);
+                throw new BusyPortException(this.serialPort.PortName, $"Port '{this.serialPort.PortName}' is busy.", ex);
             }
             catch (Exception ex) // System.IO.FileNotFoundException
             {
@@ -109,7 +109,10 @@ namespace NineDigit.SerialTransport
             try
             {
                 this.EnsurePortIsOpen();
-                this.serialPort.Write(data, 0, data.Length);
+                var stream = this.serialPort.BaseStream;
+
+                stream.Write(data, 0, data.Length);
+                stream.Flush();
             }
             catch (OperationCanceledException)
             {
@@ -163,12 +166,12 @@ namespace NineDigit.SerialTransport
                 this.serialPort.Close();
         }
 
-#region IDisposable
-        private bool _disposed;
+        #region IDisposable
+        private bool disposed;
 
         private void Dispose(bool disposing)
         {
-            if (_disposed)
+            if (disposed)
                 return;
             
             if (disposing)
@@ -181,7 +184,7 @@ namespace NineDigit.SerialTransport
                 // "Port does not exists" occurs if device has been plugged out physically.
                 catch (IOException) { }
             }
-            _disposed = true;
+            disposed = true;
         }
 
         public void Dispose()
@@ -189,7 +192,7 @@ namespace NineDigit.SerialTransport
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
-#endregion
+        #endregion
     }
 }
 #endif

@@ -1,35 +1,28 @@
-﻿using System;
-using System.Threading;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using NineDigit.SerialTransport;
+using System.Threading;
 
-namespace NineDigit.SerialTransport.CLI
+string portName = "/dev/cu.usbmodem205C377548521";
+SerialPortOptions serialPortOptions = new SerialPortOptions
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var portName = "/dev/cu.usbmodem205C377548521";
-            var serialPortOptions = new SerialPortOptions
-            {
-                Parity = Parity.None,
-                BaudRate = 9600,
-                DataBits = 8
-            };
+    Parity = Parity.None,
+    BaudRate = 9600,
+    DataBits = 8
+};
 
-            var loggerFactory = LoggerFactory.Create(builder =>
-            {
-                builder.AddConsole();
-                builder.SetMinimumLevel(LogLevel.Trace);
-            });
+ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
+{
+    builder.AddConsole();
+    builder.SetMinimumLevel(LogLevel.Trace);
+});
 
-            var serialTransport = TransportFactory.CreateSerialTransport(portName, serialPortOptions, loggerFactory);
+ILogger logger = loggerFactory.CreateLogger<Program>();
 
-            // Read CHDU Lite status
-            var data = new byte[] { 0x02, 0x01, 0x00, 0x5A, 0x04 };
+ITransport serialTransport = TransportFactory.CreateSerialTransport(portName, serialPortOptions, loggerFactory);
 
-            var result = serialTransport.WriteAndReadAsync(data, 29, CancellationToken.None)
-                .GetAwaiter().GetResult();
-        }
-    }
-}
+// Read CHDU Lite status
+byte[] dataToSend = new byte[] { 0x02, 0x01, 0x00, 0x5A, 0x04 };
+
+byte[] dataReceived = await serialTransport.WriteAndReadAsync(dataToSend, responseLength: 29, CancellationToken.None);
+
+logger.LogDebug("Response received from device: {dataReceived}", dataReceived);
